@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.kato.projetoum.domain.Categoria;
 import com.kato.projetoum.domain.Cidade;
+import com.kato.projetoum.domain.Cliente;
+import com.kato.projetoum.domain.Endereco;
 import com.kato.projetoum.domain.Estado;
 import com.kato.projetoum.domain.Produto;
+import com.kato.projetoum.domain.enums.TipoCliente;
 import com.kato.projetoum.repositories.CategoriaRepository;
 import com.kato.projetoum.repositories.CidadeRepository;
+import com.kato.projetoum.repositories.ClienteRepository;
+import com.kato.projetoum.repositories.EnderecoRepository;
 import com.kato.projetoum.repositories.EstadoRepository;
 import com.kato.projetoum.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class ProjetoumApplication implements CommandLineRunner{
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoumApplication.class, args);
@@ -69,6 +80,19 @@ public class ProjetoumApplication implements CommandLineRunner{
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Rayan Salewski", "rayansalewski@gmail.com", "26392882630", TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("18826699", "2777399919"));
+		
+		Endereco e1 = new Endereco(null, "R. Que Nao Percebe", "24", "Jardim Dosoma e Gomorra", "01224024", cli1, c3);
+		Endereco e2 = new Endereco(null, "R. Logo ali", "69", "Jardim do Eden", "04232000", cli1, c1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
 		
 	}
 
