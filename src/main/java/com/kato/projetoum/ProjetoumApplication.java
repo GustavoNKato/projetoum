@@ -108,8 +108,8 @@ public class ProjetoumApplication implements CommandLineRunner{
 		
 		cli1.getTelefones().addAll(Arrays.asList("18826699", "2777399919"));
 		
-		Endereco e1 = new Endereco(null, "R. Que Nao Percebe", "24", "Jardim Dosoma e Gomorra", "01224024", cli1, c3);
-		Endereco e2 = new Endereco(null, "R. Logo ali", "69", "Jardim do Eden", "04232000", cli1, c1);
+		Endereco e1 = new Endereco(null, "R. Que Nao Percebe", "24", "Apto 240", "Jardim Dosoma e Gomorra", "01224024", cli1, c3);
+		Endereco e2 = new Endereco(null, "R. Logo ali", "69", "Segundo andar", "Jardim do Eden", "04232000", cli1, c1);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		
