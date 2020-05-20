@@ -12,11 +12,11 @@ import com.kato.projetoum.services.PedidoService;
 
 @RestController
 @RequestMapping(value = "/pedidos")
-public class PedidoResources {
-	
+public class PedidoResource {
+
 	@Autowired
 	private PedidoService service;
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
 		Pedido obj = service.find(id);

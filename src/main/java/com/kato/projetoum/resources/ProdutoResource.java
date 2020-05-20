@@ -18,7 +18,7 @@ import com.kato.projetoum.services.ProdutoService;
 
 @RestController
 @RequestMapping(value = "/produtos")
-public class ProdutoResources {
+public class ProdutoResource {
 	
 	@Autowired
 	private ProdutoService service;
