@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.kato.projetoum.domain.Cidade;
 import com.kato.projetoum.domain.Cliente;
 import com.kato.projetoum.domain.Endereco;
+import com.kato.projetoum.domain.enums.Perfil;
 import com.kato.projetoum.domain.enums.TipoCliente;
 import com.kato.projetoum.dto.ClienteDTO;
 import com.kato.projetoum.dto.ClienteNewDTO;
 import com.kato.projetoum.repositories.ClienteRepository;
 import com.kato.projetoum.repositories.EnderecoRepository;
+import com.kato.projetoum.security.UserSS;
+import com.kato.projetoum.services.exceptions.AuthorizationException;
 import com.kato.projetoum.services.exceptions.DataIntegrityException;
 import com.kato.projetoum.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +40,11 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado!");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
